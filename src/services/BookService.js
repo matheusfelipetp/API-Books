@@ -21,6 +21,14 @@ export const createBookService = (req) => {
     id: uuidv4(),
   };
 
+  const foundBook = foundUser.books.find(
+    (elem) => elem.title === newBook.title,
+  );
+
+  if (foundBook) {
+    return [409, { error: 'Livro já cadastrado!' }];
+  }
+
   foundUser.books.push(newBook);
   books.push(newBook);
 
